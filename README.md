@@ -1,40 +1,39 @@
-# vue-test-lesta
+# Тестовое задание на вакансию `Junior frontend developer` в `Lesta Games`
+ Ссылка на задание: https://gist.github.com/nonamenix/fc7609de3ebe2642db6324bc962295b2
 
-This template should help get you started developing with Vue 3 in Vite.
+## Описание проекта
+Веб страница, на которой можно посмотреть все корабли игры «Мир Кораблей» с возможностью сортировки, поиска и фильтрации. 
 
-## Recommended IDE Setup
+На главной странице можно выбрать категорию кораблей для просмотра или установить подробные фильтры. 
+Также присутствует поиск по имени корабля. 
+Список выбранных кораблей можно посмотреть в двух режимах - в виде таблицы и в виде сетки с карточками кораблей. 
+Отфильтрованные корабли можно дополнительно отсортировать по параметрам кораблей. 
+Клик по карточке корабля или по строке таблицы показывает всплывающее окно с подробным описанием выбранного корабля. 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Использованные технологии
+*[Vue 3](https://vuejs.org/) - реактивный фреймворк, основа проекта
+*[Vue Apollo](https://apollo.vuejs.org/) - библиотека интеграции Apollo, GraphQL во Vue
+*[Pinia](https://pinia.vuejs.org/) - стандартный менеджер состояния для Vue 3
+*[Oh, Vue Icons!](https://oh-vue-icons.js.org/) - библиотека иконок
+*[Vite](https://vitejs.dev/) - инструментарий автоматизации рабочих процессов внутри проекта
+*[Typescript](https://www.typescriptlang.org/) - типизированный JavaScript
 
-## Type Support for `.vue` Imports in TS
+## Что можно улучшить и дополнить:
+*Ленивая загрузка
+Можно реализовать ленивую загрузку или отображение по страницам. Но в текущем виде сетевым запросом можно получить только данные сразу по всем кораблям и поэтому полезность ленивой загрузки уже полученных данных небольшая. Текущее количество данных не нагружает страницу радикально, при этом в большинстве сценариев использования отображаются только отфильтрованная часть данных.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+*Адаптив
+Улучшить адаптивный дизайн для небольших экранов. В текущем виде страница доступна для мобильных устройст, но остаются шероховатости. Не помешало бы добавить использование медиа-запросов. 
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+*Смена темы оформления
+В проекте использована стандартная тёмная минималистская тема шаблона Vite для Vue. Можно добавить переключение на светлую тему.
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Установка:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
 ```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
 ```

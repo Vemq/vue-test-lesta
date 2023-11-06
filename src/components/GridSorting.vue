@@ -45,12 +45,11 @@ const showGridSort = computed(
 .grid-sorting {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 18px;
   height: 100%;
 }
 
 .grid-sorting-item {
-  width: 60px;
   text-decoration: underline dotted;
 }
 

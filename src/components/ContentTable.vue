@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TableRow from './ContentSectionTableRow.vue';
+import TableRow from './ContentTableRow.vue';
 import SortSwitcher from './SortSwitcher.vue';
 import { type ShipData, type SortField } from '../utils/types';
 

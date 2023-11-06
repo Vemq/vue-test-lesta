@@ -2,9 +2,14 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import ContentSectionToolbar from './ContentSectionToolbar.vue';
-import ContentSectionGrid from './ContentSectionGrid.vue';
-import ContentSectionTable from './ContentSectionTable.vue';
+import ContentToolbar from './ContentToolbar.vue';
+import ContentInfoMessage from './ContentInfoMessage.vue';
+import ClearQueryElement from './ClearQueryElement.vue';
+import GridSorting from './GridSorting.vue';
+import LayoutSwitcher from './LayoutSwitcher.vue';
+import ContentGrid from './ContentGrid.vue';
+import ContentTable from './ContentTable.vue';
+
 import { type LayoutType } from '../utils/types';
 
 import { useDisplayedShipsStore } from '../stores/displayedShips';
@@ -18,16 +23,32 @@ const selectedLayout = ref<LayoutType>('grid');
 
 <template>
   <div class="ship-page-layout__content">
-    <ContentSectionToolbar
-      @switchLayout="(layout: LayoutType) => selectedLayout = layout"
-      :selectedLayout="selectedLayout"
-    />
+    <ContentToolbar>
+      <template #left>
+        <div class="ship-page-layout__left-toolbar-side">
+          <ContentInfoMessage />
+          <ClearQueryElement>✕ Clear</ClearQueryElement>
+        </div>
+      </template>
+
+      <template #middle>
+        <GridSorting :selectedLayout="selectedLayout" />
+      </template>
+
+      <template #right>
+        <LayoutSwitcher
+          :selectedLayout="selectedLayout"
+          @switchLayout="(layout: LayoutType) => selectedLayout = layout"
+        />
+      </template>
+    </ContentToolbar>
+
     <template v-if="totalShipsFound > 0">
-      <ContentSectionTable
+      <ContentTable
         v-if="selectedLayout === 'table'"
         :shipsData="displayedShipsData"
       />
-      <ContentSectionGrid
+      <ContentGrid
         v-if="selectedLayout === 'grid'"
         :shipsData="displayedShipsData"
       />
@@ -40,6 +61,11 @@ const selectedLayout = ref<LayoutType>('grid');
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100%;  
+}
+
+.ship-page-layout__left-toolbar-side {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

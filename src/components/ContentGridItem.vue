@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 import PropIcon from './ui/PropIcon.vue';
 import ModalContainer from './ModalContainer.vue';
 import DescriptionCard from './DescriptionCard.vue';
-
 import toRomanLevel from '../utils/toRomanLevel';
+import type { ShipData } from "src/types/shipDataType.d.ts";
 
 const props = defineProps<ShipData>();
 const showDescriptionCard = ref(false);
@@ -24,11 +24,13 @@ const showDescriptionCard = ref(false);
     </div>
 
     <img class="grid-item__image" :src="icons.small" alt="ship image" />
-    <div class="grid-item__description-popover">
-    </div>
+    <div class="grid-item__description-popover"></div>
 
     <Teleport to="body">
-      <ModalContainer :show="showDescriptionCard" @close="showDescriptionCard = false">
+      <ModalContainer
+        :show="showDescriptionCard"
+        @close="showDescriptionCard = false"
+      >
         <DescriptionCard v-bind="props" />
       </ModalContainer>
     </Teleport>

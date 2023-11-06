@@ -1,4 +1,3 @@
-
 type LayoutType = 'grid' | 'table'
 type FiltersCategory = 'nations' | 'types' | 'levels'
 type SortField = 'nation' | 'type' | 'title' | 'level'
@@ -9,33 +8,6 @@ interface Sorting {
     sortField: SortField 
     isAscending: boolean
     sortOrder?: string[]
-}
-
-interface ShipData {
-    id: string
-    title: string
-    description: string
-    icons: {
-        large: string
-        small: string
-        contour: string
-    }
-    level: number
-    type: {
-        name: string
-        title: string
-        icons: {
-            default: string
-        }
-    }
-    nation: {
-        name: string
-        title: string
-        icons: {
-            large: string
-            tiny: string
-        }
-    }
 }
 
 interface LevelInfo {

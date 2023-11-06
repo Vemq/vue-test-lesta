@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import toRomanLevel from '../utils/toRomanLevel'
+import type { ShipData } from "src/types/shipDataType.d.ts";
+
 defineProps<ShipData>();
 </script>
 

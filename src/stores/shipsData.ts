@@ -2,6 +2,8 @@ import { ref, computed } from 'vue'
 import { type Ref } from 'vue';
 import { defineStore } from 'pinia'
 
+import toRomanLevel from '../utils/toRomanLevel';
+
 import { type ShipData, type NationInfo, type ShipTypeInfo, type ResultData, type LevelInfo } from "../utils/types";
 
 export const useShipsDataStore = defineStore('allShips', () => {
@@ -10,10 +12,9 @@ export const useShipsDataStore = defineStore('allShips', () => {
     const nationsData = ref<NationInfo[]>([]);
     const shipTypesData = ref<ShipTypeInfo[]>([]);
 
-    const maxShipLevel = ref(11);
-    const levelsData = computed<LevelInfo[]>(() => Array.from({ length: maxShipLevel.value }, (_, i) => ({
+    const levelsData = computed<LevelInfo[]>(() => Array.from({ length: 11 }, (_, i) => ({
         name: String(i + 1),
-        title: ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'][i] || String(i + 1),
+        title: toRomanLevel(i + 1),
     })))
 
     const nationSortOrder = computed(() => nationsData.value.map(nation => nation.name));
@@ -34,12 +35,10 @@ export const useShipsDataStore = defineStore('allShips', () => {
         shipsData,
         nationsData,
         shipTypesData,
-
-        maxShipLevel,
         levelsData,
-
         nationSortOrder,
         shipTypeSortOrder,
+        
         setDataToStore,
     }
 })

@@ -3,6 +3,7 @@ import CheckboxLabel from './ui/CheckboxLabel.vue';
 import { type FiltersCategory, type FilterInfo } from '../utils/types';
 
 import { useFilteredShipsStore } from '../stores/filteredShips';
+import { useSearchQueryStore } from "../stores/searchQuery";
 
 const props = defineProps<{
   title: string;
@@ -10,9 +11,15 @@ const props = defineProps<{
   filtersData: T[];
 }>();
 
+const { setSerchQueryText } = useSearchQueryStore();
 const filteredStore = useFilteredShipsStore();
 
 const isChecked = (filter: string) => filteredStore.selectedFilters[props.category].includes(filter);
+
+function checkBoxToggle(filter: string, filterCategory: FiltersCategory, checked: boolean) {
+  setSerchQueryText('');
+  filteredStore.setFilter(filter, filterCategory, checked);
+}
 </script>
 
 <template>
@@ -21,7 +28,7 @@ const isChecked = (filter: string) => filteredStore.selectedFilters[props.catego
     <div class="filters-section__labels">
       <CheckboxLabel
         v-for="filter in filtersData"
-        @toggle="filteredStore.setFilter(filter.name, category, $event)"
+        @toggle="checkBoxToggle(filter.name, category, $event)"
         :value="filter.name"
         :is-checked="isChecked(filter.name)"
       >

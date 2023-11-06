@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ShipFilters from './ShipFilters.vue';
-import { useFilteredShipsStore } from '../stores/filteredShips';
+import { storeToRefs } from 'pinia';
 
-const filteredStore = useFilteredShipsStore();
+import ShipFilters from './ShipFilters.vue';
+
+import { useFilteredShipsStore } from '../stores/filteredShips';
+import { useSearchQueryStore } from '../stores/searchQuery';
+
 const showFilters = ref(false);
 
+const searchQueryStore = useSearchQueryStore();
+const { serchInputValue } = storeToRefs(searchQueryStore);
+const { setSerchQueryText } = searchQueryStore;
+
+const filteredShipsStore = useFilteredShipsStore();
+const { haveSelectedFilters } = storeToRefs(filteredShipsStore);
+const { clearFilters } = filteredShipsStore;
+
 const searchButtonHandler = () => {
-  if (filteredStore.serchInputValue) {
-    filteredStore.setSerchQueryText(filteredStore.serchInputValue);
-  }
+  if (haveSelectedFilters.value && !serchInputValue.value) return;
+  clearFilters();
+  setSerchQueryText(serchInputValue.value);
 };
 </script>
 
@@ -20,19 +31,17 @@ const searchButtonHandler = () => {
       Filters
     </span>
 
-    <form
-      @submit.prevent="searchButtonHandler"
-    >
+    <form @submit.prevent="searchButtonHandler">
       <label class="search-toolbar__search-lable">
         Search:
         <input
-          v-model="filteredStore.serchInputValue"
+          v-model="serchInputValue"
           class="search-toolbar__search-input"
           placeholder="Enter ship name"
         />
         <button
-          v-if="filteredStore.serchInputValue"
-          @click="filteredStore.setSerchQueryText('')"
+          v-if="serchInputValue"
+          @click="setSerchQueryText('')"
           type="button"
           class="search-toolbar__clear-button"
         >

@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
+
 import SortSwitcher from './SortSwitcher.vue';
-import { type SortField } from '../utils/types';
-import { type LayoutType } from '../utils/types';
+
+import { type SortField, type LayoutType } from '../utils/types';
+
+import { useDisplayedShipsStore } from '../stores/displayedShips';
 import { useFilteredShipsStore } from '../stores/filteredShips';
+import { useSearchQueryStore } from '../stores/searchQuery';
+import { useSortedShipsStore } from '../stores/sortedShips';
 
 const props = defineProps<{
   selectedLayout: LayoutType;
@@ -14,7 +20,17 @@ defineEmits<{
   toggleFilters: [];
 }>();
 
+const displayedShipsStore = useDisplayedShipsStore();
+const { haveQueryOrFilters, totalShipsFound } = storeToRefs(displayedShipsStore);
+
 const filteredShipsStore = useFilteredShipsStore();
+const { clearFilters } = filteredShipsStore;
+
+const searchQueryStore = useSearchQueryStore();
+const { searchQuery } = storeToRefs(searchQueryStore);
+const { setSerchQueryText } = searchQueryStore;
+
+const { setSortingData } = useSortedShipsStore();
 
 const sortElements: { title: string; sortFildName: SortField }[] = [
   { title: 'Nation', sortFildName: 'nation' },
@@ -24,21 +40,28 @@ const sortElements: { title: string; sortFildName: SortField }[] = [
 ];
 
 const showGridSort = computed(
-  () =>
-    filteredShipsStore.totalShipsFound > 0 && props.selectedLayout === 'grid'
+  () => totalShipsFound.value > 0 && props.selectedLayout === 'grid'
 );
 
 const selectedShipsMessage = computed(() => {
-  if (!filteredShipsStore.haveSelectedFilters) {
+  if (!haveQueryOrFilters.value) {
     return 'Nothing selected. To begin, please choose a category below or set filters above.';
   }
 
-  return `${ filteredShipsStore.searchQuery
-    ? `Search query: "${filteredShipsStore.searchQuery}".`
-    : ''}  ${filteredShipsStore.totalShipsFound > 0
-    ? `Total ships found: ${filteredShipsStore.totalShipsFound}`
-    : 'Nothing found with the specified parameters.'}`
+  return `${
+    searchQuery.value ? `Search query: "${searchQuery.value}".` : ''
+  }  ${
+    totalShipsFound.value > 0
+      ? `Total ships found: ${totalShipsFound.value}`
+      : 'Nothing found with the specified parameters.'
+  }`;
 });
+
+function clearCrossHandler() {
+  clearFilters();
+  setSerchQueryText('');
+  setSortingData(null);
+}
 </script>
 
 <template>
@@ -47,8 +70,8 @@ const selectedShipsMessage = computed(() => {
       <span>{{ selectedShipsMessage }}</span>
       <span
         class="content-toolbar__clear-query"
-        v-if="filteredShipsStore.haveSelectedFilters"
-        @click="filteredShipsStore.clearFilters"
+        v-if="haveQueryOrFilters"
+        @click="clearCrossHandler"
       >
         ✕ Clear
       </span>
@@ -72,19 +95,16 @@ const selectedShipsMessage = computed(() => {
       </template>
     </div>
 
-    <div
-      class="content-toolbar__switch-layout"
-      v-if="filteredShipsStore.totalShipsFound > 0"
-    >
+    <div class="content-toolbar__switch-layout" v-if="totalShipsFound > 0">
       <div
-        @click="event => $emit('switchLayout', 'table')"
+        @click="$emit('switchLayout', 'table')"
         class="content-toolbar__switch-button"
         :class="{ active: selectedLayout === 'table' }"
       >
         <v-icon name="fa-th-list" />Table
       </div>
       <div
-        @click="event => $emit('switchLayout', 'grid')"
+        @click="$emit('switchLayout', 'grid')"
         class="content-toolbar__switch-button"
         :class="{ active: selectedLayout === 'grid' }"
       >

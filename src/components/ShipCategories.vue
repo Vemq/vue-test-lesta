@@ -2,9 +2,9 @@
 import PropIcon from './ui/PropIcon.vue';
 import ShipCategoriesSection from './ShipCategoriesSection.vue';
 import { storeToRefs } from 'pinia';
-import { useAllShipsStore } from '../stores/allShips';
+import { useShipsDataStore } from '../stores/shipsData';
 
-const { nationsData, shipTypesData, levelsData } = storeToRefs(useAllShipsStore());
+const { nationsData, shipTypesData, levelsData } = storeToRefs(useShipsDataStore());
 </script>
 
 <template>
@@ -82,3 +82,4 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(useAllShipsStore(
   transition: all 0.2s ease-out;
 }
 </style>
+../stores/shipsData

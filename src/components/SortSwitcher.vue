@@ -1,24 +1,23 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from 'pinia';
-import { useFilteredShipsStore } from '../stores/filteredShips';
+
 import { type SortField } from '../utils/types';
-const filteredShipsStore = useFilteredShipsStore();
+import { useSortedShipsStore } from "../stores/sortedShips";
 
 const props = defineProps<{
   sortField: SortField;
 }>();
 
-const { tableSorting } = storeToRefs(filteredShipsStore);
-const { setTableSorting } = filteredShipsStore;
+const sortedShipsStore = useSortedShipsStore();
+const { sorting } = storeToRefs(sortedShipsStore);
+const { setSortingData } = sortedShipsStore;
 
-const isActiveSorting = computed(() => tableSorting.value && tableSorting.value.sortField === props.sortField);
+const isActiveSorting = computed(() => sorting.value && sorting.value.sortField === props.sortField);
 
-const switchSorting = () => {
-  const isAscending =
-  isActiveSorting.value ? !tableSorting.value!.isAscending
-      : false;
-  setTableSorting(props.sortField, isAscending);
+function switchSorting() {
+  const isAscending = isActiveSorting.value ? !sorting.value!.isAscending : false;  
+  setSortingData(props.sortField, isAscending);
 };
 </script>
 
@@ -32,7 +31,7 @@ const switchSorting = () => {
         v-if="isActiveSorting"
         class="sort-switcher__arrow"        
       >
-        <v-icon v-if="isActiveSorting" :name="`co-arrow-${tableSorting && tableSorting.isAscending  ? 'bottom': 'top'}`"/>
+        <v-icon v-if="isActiveSorting" :name="`co-arrow-${sorting && sorting.isAscending  ? 'bottom': 'top'}`"/>
       </span>
     </div>
   </div>

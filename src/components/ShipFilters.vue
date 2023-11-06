@@ -2,10 +2,10 @@
 import { storeToRefs } from 'pinia';
 import ShipFiltersSection from './ShipFiltersSection.vue';
 import PropIcon from './ui/PropIcon.vue';
-import { useAllShipsStore } from '../stores/allShips';
+import { useShipsDataStore} from '../stores/shipsData';
 
 const { nationsData, shipTypesData, levelsData } = storeToRefs(
-  useAllShipsStore()
+  useShipsDataStore()
 );
 </script>
 
@@ -47,3 +47,4 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(
   gap: 10%;
 }
 </style>
+../stores/shipsData

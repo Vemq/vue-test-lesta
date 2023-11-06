@@ -8,7 +8,7 @@ defineProps<{
   filtersData: T[];
 }>();
 
-const filteredStore = useFilteredShipsStore(); 
+const filteredShipsStore = useFilteredShipsStore(); 
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const filteredStore = useFilteredShipsStore();
     <ul class="category-section__list">
       <li class="category-section__list-item"
         v-for="filter in filtersData"
-        @click="filteredStore.setFilter(filter.name, category)"
+        @click="filteredShipsStore.setFilter(filter.name, category)"
       >
         <slot :filter="filter"></slot>
       </li>

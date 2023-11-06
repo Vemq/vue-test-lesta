@@ -1,23 +1,37 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+
 import ContentSectionToolbar from './ContentSectionToolbar.vue';
 import ContentSectionGrid from './ContentSectionGrid.vue';
 import ContentSectionTable from './ContentSectionTable.vue';
 import { type LayoutType } from '../utils/types';
-import { useFilteredShipsStore } from '../stores/filteredShips';
 
-const filteredStore = useFilteredShipsStore();
+import { useDisplayedShipsStore } from '../stores/displayedShips';
+
+const { totalShipsFound, displayedShipsData } = storeToRefs(
+  useDisplayedShipsStore()
+);
+
 const selectedLayout = ref<LayoutType>('grid');
 </script>
 
 <template>
   <div class="ship-page-layout__content">
-    <ContentSectionToolbar @switchLayout="(layout: LayoutType) => selectedLayout = layout" :selectedLayout="selectedLayout" />
-    <template v-if="filteredStore.totalShipsFound > 0">
-      <ContentSectionTable v-if="selectedLayout === 'table'" :shipsData="filteredStore.filteredShipsData"/>
-      <ContentSectionGrid v-if="selectedLayout === 'grid'" :shipsData="filteredStore.filteredShipsData"/>
+    <ContentSectionToolbar
+      @switchLayout="(layout: LayoutType) => selectedLayout = layout"
+      :selectedLayout="selectedLayout"
+    />
+    <template v-if="totalShipsFound > 0">
+      <ContentSectionTable
+        v-if="selectedLayout === 'table'"
+        :shipsData="displayedShipsData"
+      />
+      <ContentSectionGrid
+        v-if="selectedLayout === 'grid'"
+        :shipsData="displayedShipsData"
+      />
     </template>
-
   </div>
 </template>
 

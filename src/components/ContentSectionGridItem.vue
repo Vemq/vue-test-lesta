@@ -6,6 +6,7 @@ import DescriptionCard from './DescriptionCard.vue';
 
 import { type ShipData } from '../utils/types';
 import toRomanLevel from '../utils/toRomanLevel';
+
 const props = defineProps<ShipData>();
 const showDescriptionCard = ref(false);
 </script>

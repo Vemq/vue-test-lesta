@@ -6,9 +6,9 @@ import gql from 'graphql-tag';
 import MainPage from './components/MainPage.vue';
 import ErrorPage from './components/ErrorPage.vue';
 
-import { useAllShipsStore } from './stores/allShips';
+import { useShipsDataStore } from './stores/shipsData';
 
-const allShipsStore = useAllShipsStore();
+const shipsDataStore = useShipsDataStore();
 
 const SHIPS_DATA_QUERY = gql`
   query getData {
@@ -63,7 +63,7 @@ const { result, error, loading } = useQuery(SHIPS_DATA_QUERY);
 
 watch(loading, () => {
   if (result.value) {
-    allShipsStore.setDataToStore(result)
+    shipsDataStore.setDataToStore(result)
   };
 });
 </script>

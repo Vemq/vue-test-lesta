@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 
 import { type ShipData, type NationInfo, type ShipTypeInfo, type ResultData, type LevelInfo } from "../utils/types";
 
-export const useAllShipsStore = defineStore('allShips', () => {
+export const useShipsDataStore = defineStore('allShips', () => {
     const shipsData = ref<ShipData[]>([]);
 
     const nationsData = ref<NationInfo[]>([]);

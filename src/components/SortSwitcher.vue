@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import { storeToRefs } from 'pinia';
 
-import { type SortField } from '../utils/types';
 import { useSortedShipsStore } from "../stores/sortedShips";
 
 const props = defineProps<{

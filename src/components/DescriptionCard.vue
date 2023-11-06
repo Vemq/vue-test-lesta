@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { type ShipData } from '../utils/types';
 import toRomanLevel from '../utils/toRomanLevel'
 defineProps<ShipData>();
 </script>

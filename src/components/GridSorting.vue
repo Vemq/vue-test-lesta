@@ -4,7 +4,6 @@ import { storeToRefs } from 'pinia';
 
 import SortSwitcher from './SortSwitcher.vue';
 
-import { type SortField, type LayoutType } from '../utils/types';
 import { useDisplayedShipsStore } from '../stores/displayedShips';
 
 const props = defineProps<{

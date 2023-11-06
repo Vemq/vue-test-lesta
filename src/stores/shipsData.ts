@@ -4,8 +4,6 @@ import { defineStore } from 'pinia'
 
 import toRomanLevel from '../utils/toRomanLevel';
 
-import { type ShipData, type NationInfo, type ShipTypeInfo, type ResultData, type LevelInfo } from "../utils/types";
-
 export const useShipsDataStore = defineStore('allShips', () => {
     const shipsData = ref<ShipData[]>([]);
 

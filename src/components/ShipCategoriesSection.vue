@@ -1,6 +1,5 @@
 <script setup lang="ts" generic="T extends FilterInfo">
 import { useFilteredShipsStore } from '../stores/filteredShips';
-import { type FiltersCategory, type FilterInfo } from "../utils/types";
 
 defineProps<{
   title: string;

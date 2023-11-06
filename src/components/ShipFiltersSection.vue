@@ -1,6 +1,5 @@
 <script setup lang="ts" generic="T extends FilterInfo">
 import CheckboxLabel from './ui/CheckboxLabel.vue';
-import { type FiltersCategory, type FilterInfo } from '../utils/types';
 
 import { useFilteredShipsStore } from '../stores/filteredShips';
 import { useSearchQueryStore } from "../stores/searchQuery";

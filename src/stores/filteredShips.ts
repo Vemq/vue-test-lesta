@@ -2,8 +2,6 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { storeToRefs } from 'pinia'
 
-import { type SelectedFilters, type FiltersCategory } from "../utils/types";
-
 import { useShipsDataStore } from "./shipsData";
 
 export const useFilteredShipsStore = defineStore('filteredShips', () => {

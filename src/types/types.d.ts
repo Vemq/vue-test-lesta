@@ -1,17 +1,17 @@
 
-export type LayoutType = 'grid' | 'table'
-export type FiltersCategory = 'nations' | 'types' | 'levels'
-export type SortField = 'nation' | 'type' | 'title' | 'level'
+type LayoutType = 'grid' | 'table'
+type FiltersCategory = 'nations' | 'types' | 'levels'
+type SortField = 'nation' | 'type' | 'title' | 'level'
 
-export type FilterInfo = NationInfo | ShipTypeInfo | LevelInfo
+type FilterInfo = NationInfo | ShipTypeInfo | LevelInfo
 
-export interface Sorting {
+interface Sorting {
     sortField: SortField 
     isAscending: boolean
     sortOrder?: string[]
 }
 
-export interface ShipData {
+interface ShipData {
     id: string
     title: string
     description: string
@@ -38,12 +38,12 @@ export interface ShipData {
     }
 }
 
-export interface LevelInfo {
+interface LevelInfo {
     name: string
     title: string
 }
 
-export interface ShipTypeInfo {
+interface ShipTypeInfo {
     name: string
     title: string
     contour?: string
@@ -52,7 +52,7 @@ export interface ShipTypeInfo {
     }
 }
 
-export interface NationInfo {
+interface NationInfo {
     name: string
     title: string
     color: string
@@ -62,13 +62,13 @@ export interface NationInfo {
     }
 }
 
-export interface ResultData {
+interface ResultData {
     vehicles: ShipData[];
     vehicleTypes: ShipTypeInfo[];
     nations: NationInfo[];
 }
 
-export interface SelectedFilters {
+interface SelectedFilters {
     nations: string[],
     levels: string[],
     types: string[],

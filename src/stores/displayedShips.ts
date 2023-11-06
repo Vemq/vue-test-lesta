@@ -1,8 +1,7 @@
 import { computed } from 'vue'
 import { defineStore } from 'pinia'
 import { storeToRefs } from 'pinia'
-import { type ShipData } from "../utils/types";
-
+ 
 import { useFilteredShipsStore } from "./filteredShips";
 import { useSearchQueryStore } from "./searchQuery";
 import { useSortedShipsStore } from "./sortedShips";

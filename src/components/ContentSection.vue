@@ -10,7 +10,6 @@ import LayoutSwitcher from './LayoutSwitcher.vue';
 import ContentGrid from './ContentGrid.vue';
 import ContentTable from './ContentTable.vue';
 
-import { type LayoutType } from '../utils/types';
 
 import { useDisplayedShipsStore } from '../stores/displayedShips';
 

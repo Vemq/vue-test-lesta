@@ -2,10 +2,6 @@
 import SearchToolbar from './SearchToolbar.vue';
 import ContentSection from './ContentSection.vue';
 import ShipCategories from './ShipCategories.vue';
-
-import { useDisplayedShipsStore } from '../stores/displayedShips';
-const displayedShipsStore = useDisplayedShipsStore(); 
-
 </script>
 
 <template>
@@ -17,7 +13,7 @@ const displayedShipsStore = useDisplayedShipsStore();
     </Transition>
 
     <Transition>
-      <ShipCategories v-if="!displayedShipsStore.haveQueryOrFilters" />
+      <ShipCategories />
     </Transition>
   </div>
 </template>

@@ -1,21 +1,28 @@
 <script setup lang="ts">
 import PropIcon from './ui/PropIcon.vue';
-import ShipCategoriesSection from './ShipCategoriesSection.vue';
 import { storeToRefs } from 'pinia';
-import { useShipsDataStore } from '../stores/shipsData';
 
-const { nationsData, shipTypesData, levelsData } = storeToRefs(useShipsDataStore());
+import ShipCategoriesSection from './ShipCategoriesSection.vue';
+
+import { useShipsDataStore } from '../stores/shipsData';
+import { useDisplayedShipsStore } from '../stores/displayedShips';
+
+const { haveQueryOrFilters } = storeToRefs(useDisplayedShipsStore());
+const { nationsData, shipTypesData, levelsData } = storeToRefs(
+  useShipsDataStore()
+);
 </script>
 
 <template>
-  <div class="ship-categories">
+  <div class="ship-categories" v-if="!haveQueryOrFilters">
     <ShipCategoriesSection
       v-slot="slotProps"
       title="Nation"
       category="nations"
       :filtersData="nationsData"
     >
-      <img class="ship-categories__flag-image"
+      <img
+        class="ship-categories__flag-image"
         :src="slotProps.filter.icons?.small"
         :alt="`flag image of ${slotProps.filter.title}`"
       />
@@ -28,7 +35,7 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(useShipsDataStore
       title="Type"
       category="types"
       :filtersData="shipTypesData"
-    >     
+    >
       <img
         :src="slotProps.filter.contour"
         :alt="`contour image of ${slotProps.filter.name}`"
@@ -43,7 +50,9 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(useShipsDataStore
       category="levels"
       :filtersData="levelsData"
     >
-      <div class="ship-categories__level-item">{{ slotProps.filter.title }}</div>
+      <div class="ship-categories__level-item">
+        {{ slotProps.filter.title }}
+      </div>
     </ShipCategoriesSection>
   </div>
 </template>
@@ -82,4 +91,3 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(useShipsDataStore
   transition: all 0.2s ease-out;
 }
 </style>
-../stores/shipsData

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import PropIcon from './ui/PropIcon.vue';
+import PropIcon from '../ui/PropIcon.vue';
 import { storeToRefs } from 'pinia';
 
 import ShipCategoriesSection from './ShipCategoriesSection.vue';
 
-import { useShipsDataStore } from '../stores/shipsData';
-import { useDisplayedShipsStore } from '../stores/displayedShips';
+import { useShipsDataStore } from '@stores/shipsData';
+import { useDisplayedShipsStore } from '@stores/displayedShips';
 
 const { haveQueryOrFilters } = storeToRefs(useDisplayedShipsStore());
 const { nationsData, shipTypesData, levelsData } = storeToRefs(

@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends FilterInfo">
-import { useFilteredShipsStore } from '../stores/filteredShips';
+import { useFilteredShipsStore } from '@stores/filteredShips';
 
 defineProps<{
   title: string;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 
-import { useDisplayedShipsStore } from '../stores/displayedShips';
-import { useFilteredShipsStore } from '../stores/filteredShips';
-import { useSearchQueryStore } from '../stores/searchQuery';
-import { useSortedShipsStore } from '../stores/sortedShips';
+import { useDisplayedShipsStore } from '@stores/displayedShips';
+import { useFilteredShipsStore } from '@stores/filteredShips';
+import { useSearchQueryStore } from '@stores/searchQuery';
+import { useSortedShipsStore } from '@stores/sortedShips';
 
 const { haveQueryOrFilters } = storeToRefs(useDisplayedShipsStore());
 const { clearFilters } = useFilteredShipsStore();

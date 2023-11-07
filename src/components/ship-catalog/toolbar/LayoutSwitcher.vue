@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useDisplayedShipsStore } from '../stores/displayedShips';
+import { useDisplayedShipsStore } from '@stores/displayedShips';
 
 defineProps<{
   selectedLayout: LayoutType;

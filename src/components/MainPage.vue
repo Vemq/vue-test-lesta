@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import SearchToolbar from './SearchToolbar.vue';
-import ContentSection from './ContentSection.vue';
-import ShipCategories from './ShipCategories.vue';
+import FiltersSearchToolbar from './filters-search-toolbar/FiltersSearchToolbar.vue';
+import ContentSection from './ship-catalog/ShipsCatalog.vue';
+import ShipCategories from './ship-categories/ShipCategories.vue';
 </script>
 
 <template>
   <div class="main-page">
-    <SearchToolbar />
+    <FiltersSearchToolbar />
 
     <Transition>
       <ContentSection />

@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import { useDisplayedShipsStore } from '../stores/displayedShips';
-import { useSearchQueryStore } from '../stores/searchQuery';
+import { useDisplayedShipsStore } from '@stores/displayedShips';
+import { useSearchQueryStore } from '@stores/searchQuery';
 
 const { haveQueryOrFilters, totalShipsFound } = storeToRefs(
   useDisplayedShipsStore()

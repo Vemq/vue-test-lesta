@@ -2,9 +2,9 @@
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import SortSwitcher from './SortSwitcher.vue';
+import SortSwitcher from '../SortSwitcher.vue';
 
-import { useDisplayedShipsStore } from '../stores/displayedShips';
+import { useDisplayedShipsStore } from '@stores/displayedShips';
 
 const props = defineProps<{
   selectedLayout: LayoutType;

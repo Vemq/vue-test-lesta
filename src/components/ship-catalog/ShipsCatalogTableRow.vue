@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import PropIcon from './ui/PropIcon.vue';
-import ModalContainer from './ModalContainer.vue';
+import PropIcon from '../ui/PropIcon.vue';
+import ModalContainer from '../ModalContainer.vue';
 import DescriptionCard from './DescriptionCard.vue';
-import toRomanLevel from "../utils/toRomanLevel";
-import type { ShipData } from "src/types/shipDataType.d.ts";
+import toRomanLevel from "../../utils/toRomanLevel";
+import type { ShipData } from "../../types/shipDataType.d.ts";
 
 const props = defineProps<ShipData>();
 const showDescriptionCard = ref(false)

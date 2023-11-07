@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import ShipFiltersSection from './ShipFiltersSection.vue';
-import PropIcon from './ui/PropIcon.vue';
-import { useShipsDataStore} from '../stores/shipsData';
+import FiltersSection from './FiltersSection.vue';
+import PropIcon from '../ui/PropIcon.vue';
+import { useShipsDataStore} from '@stores/shipsData';
 
 const { nationsData, shipTypesData, levelsData } = storeToRefs(
   useShipsDataStore()
@@ -11,25 +11,25 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(
 
 <template>
   <div class="filters">
-    <ShipFiltersSection
+    <FiltersSection
       v-slot="slotProps"
       title="Nations"
       category="nations"
       :filtersData="nationsData"
     >
       <PropIcon :iconImageLink="slotProps.filter.icons.tiny" />
-    </ShipFiltersSection>
+    </FiltersSection>
 
-    <ShipFiltersSection
+    <FiltersSection
       v-slot="slotProps"
       title="Types"
       category="types"
       :filtersData="shipTypesData"
     >
       <PropIcon :iconImageLink="slotProps.filter.icons.default" />
-    </ShipFiltersSection>
+    </FiltersSection>
 
-    <ShipFiltersSection
+    <FiltersSection
       title="Tiers"
       category="levels"
       :filtersData="levelsData"

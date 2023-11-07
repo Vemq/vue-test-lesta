@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import ShipFilters from './ShipFilters.vue';
+import Filters from './Filters.vue';
 
-import { useFilteredShipsStore } from '../stores/filteredShips';
-import { useSearchQueryStore } from '../stores/searchQuery';
+import { useFilteredShipsStore } from '@stores/filteredShips';
+import { useSearchQueryStore } from '@stores/searchQuery';
 
 const showFilters = ref(false);
 
@@ -55,7 +55,7 @@ function searchButtonHandler() {
   </div>
 
   <Transition>
-    <ShipFilters v-show="showFilters" />
+    <Filters v-show="showFilters" />
   </Transition>
 </template>
 

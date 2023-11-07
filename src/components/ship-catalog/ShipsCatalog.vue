@@ -2,15 +2,15 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import ContentToolbar from './ContentToolbar.vue';
-import ContentInfoMessage from './ContentInfoMessage.vue';
-import ClearQueryElement from './ClearQueryElement.vue';
-import GridSorting from './GridSorting.vue';
-import LayoutSwitcher from './LayoutSwitcher.vue';
-import ContentGrid from './ContentGrid.vue';
-import ContentTable from './ContentTable.vue';
+import ShipCatalogToolbar from './toolbar/ShipCatalogToolbar.vue';
+import InfoMessage from './toolbar/InfoMessage.vue';
+import ClearQuery from './toolbar/ClearQuery.vue';
+import GridSorting from './toolbar/GridSorting.vue';
+import LayoutSwitcher from './toolbar/LayoutSwitcher.vue';
+import Grid from './ShipsCatalogGrid.vue';
+import Table from './ShipsCatalogTable.vue';
 
-import { useDisplayedShipsStore } from '../stores/displayedShips';
+import { useDisplayedShipsStore } from '@/stores/displayedShips';
 
 const { totalShipsFound, displayedShipsData } = storeToRefs(
   useDisplayedShipsStore()
@@ -21,11 +21,11 @@ const selectedLayout = ref<LayoutType>('grid');
 
 <template>
   <div class="ship-page-layout__content">
-    <ContentToolbar>
+    <ShipCatalogToolbar>
       <template #left>
         <div class="ship-page-layout__left-toolbar-side">
-          <ContentInfoMessage />
-          <ClearQueryElement>✕ Clear</ClearQueryElement>
+          <InfoMessage />
+          <ClearQuery>✕ Clear</ClearQuery>
         </div>
       </template>
 
@@ -39,14 +39,14 @@ const selectedLayout = ref<LayoutType>('grid');
           @switchLayout="(layout: LayoutType) => selectedLayout = layout"
         />
       </template>
-    </ContentToolbar>
+    </ShipCatalogToolbar>
 
     <template v-if="totalShipsFound > 0">
-      <ContentTable
+      <Table
         v-if="selectedLayout === 'table'"
         :shipsData="displayedShipsData"
       />
-      <ContentGrid
+      <Grid
         v-if="selectedLayout === 'grid'"
         :shipsData="displayedShipsData"
       />

@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="T extends FilterInfo">
-import CheckboxLabel from './ui/CheckboxLabel.vue';
-import { useFilteredShipsStore } from '../stores/filteredShips';
-import { useSearchQueryStore } from "../stores/searchQuery";
+import CheckboxLabel from '../ui/CheckboxLabel.vue';
+import { useFilteredShipsStore } from '@stores/filteredShips';
+import { useSearchQueryStore } from "@stores/searchQuery";
 
 const props = defineProps<{
   title: string;

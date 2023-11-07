@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { storeToRefs } from 'pinia';
-import { useSortedShipsStore } from "../stores/sortedShips";
+import { useSortedShipsStore } from "@/stores/sortedShips";
 
 const props = defineProps<{
   sortField: SortField;

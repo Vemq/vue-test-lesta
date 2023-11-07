@@ -10,14 +10,14 @@ const props = defineProps<{
   selectedLayout: LayoutType;
 }>();
 
-const { totalShipsFound } = storeToRefs(useDisplayedShipsStore());
-
 const sortElements: { title: string; sortFildName: SortField }[] = [
   { title: 'Nation', sortFildName: 'nation' },
   { title: 'Type', sortFildName: 'type' },
   { title: 'Tier', sortFildName: 'level' },
   { title: 'Name', sortFildName: 'title' },
 ];
+
+const { totalShipsFound } = storeToRefs(useDisplayedShipsStore());
 
 const showGridSort = computed(
   () => totalShipsFound.value > 0 && props.selectedLayout === 'grid'

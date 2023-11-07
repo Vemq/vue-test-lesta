@@ -17,7 +17,7 @@ const filteredShipsStore = useFilteredShipsStore();
 const { haveSelectedFilters } = storeToRefs(filteredShipsStore);
 const { clearFilters } = filteredShipsStore;
 
-const searchButtonHandler = () => {
+function searchButtonHandler() {
   if (haveSelectedFilters.value && !serchInputValue.value) return;
   clearFilters();
   setSerchQueryText(serchInputValue.value);
@@ -27,7 +27,7 @@ const searchButtonHandler = () => {
 <template>
   <div class="search-toolbar">
     <span class="search-toolbar__filters" @click="showFilters = !showFilters">
-      <v-icon name="fa-filter" :fill="showFilters && 'var(--color-heading)'" />
+      <v-icon name="fa-filter" :fill="showFilters ? 'var(--color-heading)' : ''" />
       Filters
     </span>
 

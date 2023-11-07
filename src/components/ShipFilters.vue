@@ -47,4 +47,3 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(
   gap: 10%;
 }
 </style>
-../stores/shipsData

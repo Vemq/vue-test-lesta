@@ -1,6 +1,5 @@
 <script setup lang="ts" generic="T extends FilterInfo">
 import CheckboxLabel from './ui/CheckboxLabel.vue';
-
 import { useFilteredShipsStore } from '../stores/filteredShips';
 import { useSearchQueryStore } from "../stores/searchQuery";
 
@@ -39,10 +38,6 @@ function checkBoxToggle(filter: string, filterCategory: FiltersCategory, checked
 </template>
 
 <style>
-.filters-category {
-  padding: 0 50px;
-}
-
 .filters-section__title {
   text-align: center;
 }

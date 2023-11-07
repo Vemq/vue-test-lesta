@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GridItem from './ContentGridItem.vue';
+import type { ShipData } from "src/types/shipDataType.d.ts";
 
 defineProps<{
   shipsData: ShipData[]

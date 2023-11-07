@@ -4,6 +4,34 @@ type SortField = 'nation' | 'type' | 'title' | 'level'
 
 type FilterInfo = NationInfo | ShipTypeInfo | LevelInfo
 
+interface ShipData {
+    id: string
+    title: string
+    description: string
+    icons: {
+        large: string
+        small: string
+        contour: string
+    }
+    level: number
+    type: {
+        name: string
+        title: string
+        icons: {
+            default: string
+        }
+    }
+    nation: {
+        name: string
+        title: string
+        icons: {
+            large: string
+            tiny: string
+        }
+    }
+}
+
+
 interface Sorting {
     sortField: SortField 
     isAscending: boolean

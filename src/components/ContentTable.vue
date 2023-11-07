@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TableRow from './ContentTableRow.vue';
 import SortSwitcher from './SortSwitcher.vue';
+import type { ShipData } from "src/types/shipDataType.d.ts";
 
 defineProps<{
   shipsData: ShipData[];

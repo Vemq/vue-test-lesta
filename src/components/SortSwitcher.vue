@@ -15,7 +15,7 @@ const { setSortingData } = sortedShipsStore;
 const isActiveSorting = computed(() => sorting.value && sorting.value.sortField === props.sortField);
 
 function switchSorting() {
-  const isAscending = isActiveSorting.value ? !sorting.value!.isAscending : false;  
+  const isAscending = isActiveSorting.value ? !sorting.value!.isAscending : true;  
   setSortingData(props.sortField, isAscending);
 };
 </script>
@@ -57,7 +57,6 @@ function switchSorting() {
 
 .sort-switcher__arrow {
   position: absolute;
-
   right: -19px;
   font-weight: bold;
 }

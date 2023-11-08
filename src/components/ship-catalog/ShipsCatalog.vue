@@ -3,10 +3,6 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import ShipCatalogToolbar from './toolbar/ShipCatalogToolbar.vue';
-import InfoMessage from './toolbar/InfoMessage.vue';
-import ClearQuery from './toolbar/ClearQuery.vue';
-import GridSorting from './toolbar/GridSorting.vue';
-import LayoutSwitcher from './toolbar/LayoutSwitcher.vue';
 
 import Grid from './ShipsCatalogGrid.vue';
 import Table from './ShipsCatalogTable.vue';
@@ -41,25 +37,10 @@ const { totalShipsFound, displayedShipsData } = storeToRefs(
 
 <template>
   <div class="ship-page-layout__content">
-    <ShipCatalogToolbar>
-      <template #left>
-        <div class="ship-page-layout__left-toolbar-side">
-          <InfoMessage />
-          <ClearQuery>✕ Clear</ClearQuery>
-        </div>
-      </template>
-
-      <template #middle>
-        <GridSorting :selectedLayout="selectedLayout" />
-      </template>
-
-      <template #right>
-        <LayoutSwitcher
-          :selectedLayout="selectedLayout"
-          @switchLayout="(layout: LayoutType) => selectedLayout = layout"
-        />
-      </template>
-    </ShipCatalogToolbar>
+    <ShipCatalogToolbar
+      :selectedLayout="selectedLayout"
+      @switchLayout="layout => (selectedLayout = layout)"
+    />
 
     <component
       v-if="totalShipsFound > 0"

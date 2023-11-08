@@ -1,7 +1,6 @@
 import { ref } from "vue";
-import { defineStore } from 'pinia'
-import { storeToRefs } from 'pinia'
-
+import { defineStore } from 'pinia';
+import { storeToRefs } from 'pinia';
 import { useShipsDataStore } from "./shipsData";
 
 export const useSortedShipsStore = defineStore('sortedShips', () => {
@@ -10,13 +9,10 @@ export const useSortedShipsStore = defineStore('sortedShips', () => {
     function sortShips(dataToSort: ShipData[]) {
         if (!sorting.value) return;
 
-        const sortField = sorting.value.sortField;
-        const isAscending = sorting.value.isAscending;
-        const sortOrder = sorting.value.sortOrder;
-
+        const {sortField, isAscending, sortOrder} = sorting.value;
         dataToSort.sort((a, b) => {
-            let valueA = a[sortField];
-            let valueB = b[sortField];
+            const valueA = a[sortField];
+            const valueB = b[sortField];
 
             if (sortOrder && typeof valueA === 'object' && typeof valueB === 'object') {
                 const indexA = sortOrder.indexOf(valueA.name);
@@ -36,30 +32,28 @@ export const useSortedShipsStore = defineStore('sortedShips', () => {
             if (typeof valueA === 'number' && typeof valueB === 'number') {
                 return isAscending ? valueA - valueB : valueB - valueA;
             }
-
             if (typeof valueA === 'string' && typeof valueB === 'string') {
                 return isAscending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
             }
+
             return 0;
         });
     }
 
     function setSortingData(sortField: SortField | null, isAscending = false) {
-        if (sortField === null) {
-            sorting.value = null;
-        }
-
         if (sortField) {
             const { nationSortOrder, shipTypeSortOrder } = storeToRefs(useShipsDataStore());
-            const sortOrder = (sortField === 'nation') ? nationSortOrder.value : (sortField === 'type') ? shipTypeSortOrder.value : undefined;
+            const sortOrder = (sortField === 'nation') ? nationSortOrder.value
+                            : (sortField === 'type') ? shipTypeSortOrder.value
+                            : undefined;
 
-            const currentSorting: Sorting = {
+            sorting.value = {
                 sortField,
                 isAscending,
                 sortOrder,
-            }
-
-            sorting.value = currentSorting;
+            };
+        } else {
+            sorting.value = null;
         }
     }
 

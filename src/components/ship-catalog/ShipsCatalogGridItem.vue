@@ -1,39 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import PropIcon from '../ui/PropIcon.vue';
-import ModalContainer from '../ModalContainer.vue';
-import DescriptionCard from './DescriptionCard.vue';
 import toRomanLevel from '../../utils/toRomanLevel';
-import type { ShipData } from "../../types/shipDataType.d.ts";
+import type { ShipItemProps } from "../../types/props";
 
-const props = defineProps<ShipData>();
-const showDescriptionCard = ref(false);
+defineProps<ShipItemProps>();
 </script>
 
 <template>
-  <div class="grid-item" @click="showDescriptionCard = true">
+  <div class="grid-item">
     <div class="grid-item__info">
       <div class="grid-item__top">
         <span class="grid-item__name">{{ title.toUpperCase() }}</span>
-        <PropIcon :iconImageLink="nation.icons.tiny" :title="nation.title" />
+        <PropIcon :iconImageLink="flagImageLink" :title="nation" />
       </div>
       <div class="grid-item__bottom">
-        <PropIcon :iconImageLink="type.icons.default" :title="type.title" />
+        <PropIcon :iconImageLink="typeIconLink" :title="type" />
         <div class="grid-item__level">{{ toRomanLevel(level) }}</div>
       </div>
     </div>
 
-    <img class="grid-item__image" :src="icons.small" alt="ship image" />
+    <img class="grid-item__image" :src="shipImageLink" alt="ship image" />
     <div class="grid-item__description-popover"></div>
-
-    <Teleport to="body">
-      <ModalContainer
-        :show="showDescriptionCard"
-        @close="showDescriptionCard = false"
-      >
-        <DescriptionCard v-bind="props" />
-      </ModalContainer>
-    </Teleport>
   </div>
 </template>
 

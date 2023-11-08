@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import GridItem from './ShipsCatalogGridItem.vue';
-import type { ShipData } from "../../types/shipDataType.d.ts";
+import type { ShipCardProps } from "../../types/props";
 
 defineProps<{
-  shipsData: ShipData[]
-}>()
+  shipsData: ShipData[];
+}>();
+
+defineEmits<{
+  showShipCard: [descriptionCardData: ShipCardProps];
+}>();
 </script>
 
 <template>
@@ -12,22 +16,34 @@ defineProps<{
     <TransitionGroup name="list">
       <GridItem
         v-for="{
+          id,
           title,
           level,
           description,
           type,
           nation,
-          icons,
-          id,
+          icons
         } in shipsData"
-        :title="title"
-        :description="description"
-        :level="level"
-        :type="type"
-        :nation="nation"
-        :icons="icons"
-        :id="id"
         :key="id"
+        :title="title"
+        :nation="nation.title"
+        :type="type.title"
+        :level="level"   
+        :shipImageLink="icons.small"
+        :flagImageLink="nation.icons.tiny"
+        :typeIconLink="type.icons.default"
+        @click="
+          $emit('showShipCard', {
+            title,
+            nation: nation.title,
+            type: type.title,
+            level,
+            shipImageLink: icons.large,
+            flagImageLink: nation.icons.large,
+            typeIconLink: type.icons.default,
+            description,
+          })
+        "
       />
     </TransitionGroup>
   </div>

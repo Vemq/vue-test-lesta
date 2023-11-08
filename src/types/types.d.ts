@@ -1,64 +1,63 @@
-type LayoutType = 'grid' | 'table'
-type FiltersCategory = 'nations' | 'types' | 'levels'
-type SortField = 'nation' | 'type' | 'title' | 'level'
+type LayoutType = 'grid' | 'table';
+type FiltersCategory = 'nations' | 'types' | 'levels';
+type SortField = 'nation' | 'type' | 'title' | 'level';
 
-type FilterInfo = NationInfo | ShipTypeInfo | LevelInfo
+type FilterInfo = NationInfo | ShipTypeInfo | LevelInfo;
 
 interface ShipData {
-    id: string
-    title: string
-    description: string
+    id: string;
+    title: string;
+    description: string;
     icons: {
-        large: string
-        small: string
-        contour: string
+        large: string;
+        small: string;
+        contour: string;
     }
     level: number
     type: {
-        name: string
-        title: string
+        name: string;
+        title: string;
         icons: {
-            default: string
+            default: string;
         }
     }
     nation: {
-        name: string
-        title: string
+        name: string;
+        title: string;
         icons: {
-            large: string
-            tiny: string
+            large: string;
+            tiny: string;
         }
     }
 }
 
-
 interface Sorting {
-    sortField: SortField 
-    isAscending: boolean
-    sortOrder?: string[]
+    sortField: SortField;
+    isAscending: boolean;
+    sortOrder?: string[];
 }
 
 interface LevelInfo {
-    name: string
-    title: string
+    name: string;
+    title: string;
 }
 
 interface ShipTypeInfo {
-    name: string
-    title: string
-    contour?: string
+    name: string;
+    title: string;
+    contour?: string;
     icons: {
-        default: string
+        default: string;
     }
 }
 
 interface NationInfo {
-    name: string
-    title: string
-    color: string
+    name: string;
+    title: string;
+    color: string;
     icons: {
-        tiny: string
-        small: string
+        tiny: string;
+        small: string;
     }
 }
 
@@ -69,7 +68,7 @@ interface ResultData {
 }
 
 interface SelectedFilters {
-    nations: string[],
-    levels: string[],
-    types: string[],
+    nations: string[];
+    levels: string[];
+    types: string[];
 }

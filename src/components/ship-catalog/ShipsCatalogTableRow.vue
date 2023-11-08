@@ -1,39 +1,28 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import PropIcon from '../ui/PropIcon.vue';
-import ModalContainer from '../ModalContainer.vue';
-import DescriptionCard from './DescriptionCard.vue';
 import toRomanLevel from "../../utils/toRomanLevel";
-import type { ShipData } from "../../types/shipDataType.d.ts";
+import type { ShipItemProps } from "../../types/props";
 
-const props = defineProps<ShipData>();
-const showDescriptionCard = ref(false)
+defineProps<ShipItemProps>();
 </script>
 
 <template>
-  <tr class="table-row" @click="showDescriptionCard = true">
-
+  <tr class="table-row">
     <td class="table-row__cell table-row-nation">
-      <PropIcon :iconImageLink="nation.icons.tiny" :title="nation.title" />
+      <PropIcon :iconImageLink="flagImageLink" :title="nation" />
     </td>
 
     <td class="table-row__cell table-row-type">
-      <PropIcon :iconImageLink="type.icons.default" :title="type.title" />
+      <PropIcon :iconImageLink="typeIconLink" :title="type" />
     </td>
 
     <td class="table-row__cell table-row-level">{{ toRomanLevel(level) }}</td>
 
     <td class="table-row__cell table-row-image">
-      <img :src="icons.contour" :alt="`Contour of ${title}`" />
+      <img :src="shipImageLink" :alt="`contour of ${title}`" />
     </td>
 
-    <td class="table-row__cell table-row-title">{{ title }}</td>
-
-    <Teleport to="body">
-      <ModalContainer :show="showDescriptionCard" @close="showDescriptionCard = false">
-        <DescriptionCard v-bind="props" />
-      </ModalContainer>
-    </Teleport>    
+    <td class="table-row__cell table-row-title">{{ title }}</td> 
   </tr>
 </template>
 

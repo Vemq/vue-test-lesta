@@ -1,16 +1,5 @@
 <script setup lang="ts">
-import TableRow from './ShipsCatalogTableRow.vue';
 import SortSwitcher from './SortSwitcher.vue';
-import type { ShipCardProps } from '../../types/props';
-
-defineProps<{
-  shipsData: ShipData[];
-}>();
-
-defineEmits<{
-  showShipCard: [descriptionCardData: ShipCardProps];
-}>();
-
 const tableFields: { title: string; sortFildName?: SortField }[] = [
   { title: 'Nation', sortFildName: 'nation' },
   { title: 'Type', sortFildName: 'type' },
@@ -38,37 +27,7 @@ const tableFields: { title: string; sortFildName?: SortField }[] = [
     </thead>
 
     <tbody>
-      <TableRow
-        v-for="{
-          id,
-          title,
-          level,
-          description,
-          type,
-          nation,
-          icons,
-        } in shipsData"
-        :key="id"
-        :title="title"
-        :nation="nation.title"
-        :type="type.title"
-        :level="level"
-        :shipImageLink="icons.contour"
-        :flagImageLink="nation.icons.tiny"
-        :typeIconLink="type.icons.default"
-        @click="
-          $emit('showShipCard', {
-            title,
-            nation: nation.title,
-            type: type.title,
-            level,
-            shipImageLink: icons.large,
-            flagImageLink: nation.icons.large,
-            typeIconLink: type.icons.default,
-            description,
-          })
-        "
-      />
+      <slot></slot>
     </tbody>
   </table>
 </template>

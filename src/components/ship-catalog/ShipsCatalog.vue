@@ -10,20 +10,33 @@ import LayoutSwitcher from './toolbar/LayoutSwitcher.vue';
 
 import Grid from './ShipsCatalogGrid.vue';
 import Table from './ShipsCatalogTable.vue';
+import GridItem from './ShipsCatalogGridItem.vue';
+import TableRow from './ShipsCatalogTableRow.vue';
+
 import ShipCard from './ShipCard.vue';
 import ModalContainer from '../ModalContainer.vue';
 
 import { useDisplayedShipsStore } from '@/stores/displayedShips';
 
-import type { ShipCardProps } from "../../types/props";
+import type { ShipCardProps } from '../../types/props';
 
-const ShipCardData = ref<ShipCardProps| null>(null);
+const catalogLayouts = {
+  table: {
+    base: Table,
+    item: TableRow,
+  },
+  grid: {
+    base: Grid,
+    item: GridItem,
+  },
+};
+
+const selectedLayout = ref<LayoutType>('table');
+const shipCardData = ref<ShipCardProps | null>(null);
 
 const { totalShipsFound, displayedShipsData } = storeToRefs(
   useDisplayedShipsStore()
 );
-
-const selectedLayout = ref<LayoutType>('grid');
 </script>
 
 <template>
@@ -48,22 +61,51 @@ const selectedLayout = ref<LayoutType>('grid');
       </template>
     </ShipCatalogToolbar>
 
-    <template v-if="totalShipsFound > 0">
-      <Table
-        v-if="selectedLayout === 'table'"
-        :shipsData="displayedShipsData"
-        @showShipCard ="(cardData) => {ShipCardData = cardData}"
-      />
-      <Grid
-        v-if="selectedLayout === 'grid'"
-        :shipsData="displayedShipsData"
-        @showShipCard ="(cardData) => {ShipCardData = cardData}"
-      />
-    </template>
+    <component
+      v-if="totalShipsFound > 0"
+      :is="catalogLayouts[selectedLayout].base"
+    >
+      <template
+        v-for="{
+          id,
+          title,
+          level,
+          description,
+          type,
+          nation,
+          icons,
+        } in displayedShipsData"
+        :key="id"
+      >
+        <component
+          :is="catalogLayouts[selectedLayout].item"
+          :title="title"
+          :nation="nation.title"
+          :type="type.title"
+          :level="level"
+          :shipImageLink="
+            icons[selectedLayout === 'grid' ? 'small' : 'contour']
+          "
+          :flagImageLink="nation.icons.tiny"
+          :typeIconLink="type.icons.default"
+          @click="
+            shipCardData = {
+              title,
+              nation: nation.title,
+              type: type.title,
+              level,
+              shipImageLink: icons.large,
+              flagImageLink: nation.icons.large,
+              typeIconLink: type.icons.default,
+              description,
+            }
+          "
+      /></template>
+    </component>
 
     <Teleport to="body">
-      <ModalContainer :show="!!ShipCardData" @close="ShipCardData = null">
-        <ShipCard v-if="ShipCardData" v-bind="ShipCardData" />
+      <ModalContainer :show="!!shipCardData" @close="shipCardData = null">
+        <ShipCard v-if="shipCardData" v-bind="shipCardData" />
       </ModalContainer>
     </Teleport>
   </div>
@@ -74,7 +116,7 @@ const selectedLayout = ref<LayoutType>('grid');
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;  
+  width: 100%;
 }
 
 .ship-page-layout__left-toolbar-side {

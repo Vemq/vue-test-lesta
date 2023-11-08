@@ -33,6 +33,10 @@ const shipCardData = ref<ShipCardProps | null>(null);
 const { totalShipsFound, displayedShipsData } = storeToRefs(
   useDisplayedShipsStore()
 );
+
+function crearShipCardData() {
+  shipCardData.value = null;
+}
 </script>
 
 <template>
@@ -85,8 +89,8 @@ const { totalShipsFound, displayedShipsData } = storeToRefs(
     </component>
 
     <Teleport to="body">
-      <ModalContainer :show="!!shipCardData" @close="shipCardData = null">
-        <ShipCard v-if="shipCardData" v-bind="shipCardData" />
+      <ModalContainer :show="!!shipCardData" @close="crearShipCardData">
+        <ShipCard v-if="shipCardData" v-bind="shipCardData" @close="crearShipCardData"/>
       </ModalContainer>
     </Teleport>
   </div>

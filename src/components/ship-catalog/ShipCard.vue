@@ -2,57 +2,77 @@ x
 <script setup lang="ts">
 import toRomanLevel from '../../utils/toRomanLevel';
 import type { ShipCardProps } from "../../types/props";
+
 defineProps<ShipCardProps>();
+defineEmits<{
+    close: [];
+}>()
 </script>
 
 <template>
-  <div class="description-card">
-    <div class="description-card__top">
-      <div class="description-card__info">
-        <p class="description-card__title">{{ title.toUpperCase() }}</p>
+  <div class="ship-card">
+    <span class="ship-card__close-cross" @click="() => ($emit('close'))">🗙</span>
+    <div class="ship-card__top">
+      <div class="ship-card__info">
+        <p class="ship-card__title">{{ title.toUpperCase() }}</p>
         <p>{{ `Tier ${toRomanLevel(level)} ${type}` }}</p>
         <p>{{ nation }}</p>
       </div>
       <div
-        class="description-card__flag"
+        class="ship-card__flag"
         :style="{ 'background-image': `url(${flagImageLink})` }"
       ></div>
       <img
-        class="description-card__image description-card__image_ship"
+        class="ship-card__image ship-card__image_ship"
         :src="shipImageLink"
         alt="ship image"
       />
     </div>
-    <div class="description-card__text">{{ description }}</div>
+    <div class="ship-card__text">{{ description }}</div>
   </div>
 </template>
 
 <style>
-.description-card {
+.ship-card {
   display: flex;
   flex-direction: column;
   position: relative;
   max-width: 600px;
+  width: 90vw;
   padding: 30px;
   border: 1px solid var(--color-border);
   background-color: var(--color-background-mute);
 }
 
-.description-card__top {
-  position: relative;
-  height: 310px;
+.ship-card__close-cross {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: var(--color-border-hover);
+    cursor: pointer;
+    user-select: none;
+    z-index: 1;    
 }
 
-.description-card__info {
+.ship-card__close-cross:hover {
+    color: var(--color-text); 
+}
+
+.ship-card__top {
+  position: relative;
+  height: min(300px, 40vw);
+}
+
+.ship-card__info {
   text-align: right;
 }
 
-.description-card__title {
+.ship-card__title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.description-card__flag {
+.ship-card__flag {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -62,21 +82,21 @@ defineProps<ShipCardProps>();
   opacity: 0.5;
 }
 
-.description-card__image {
+.ship-card__image {
   width: 100%;
   object-fit: contain;
 }
 
-.description-card__image_flag {
+.ship-card__image_flag {
   width: 70%;
 }
 
-.description-card__image_ship {
+.ship-card__image_ship {
   position: absolute;
   bottom: 0;
 }
 
-.description-card__text {
+.ship-card__text {
   padding-top: 10px;
   border-top: 1px solid var(--color-border);
 }

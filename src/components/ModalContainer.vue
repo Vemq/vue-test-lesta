@@ -17,7 +17,6 @@ const maskClickClose = (event: Event) => {
     <Transition name="modal">
         <div v-if="show" @click="maskClickClose" class="modal-mask">            
             <div class="modal-container">
-                <span class="modal__close-cross" @click="$emit('close')">🗙</span>
                 <slot></slot>
             </div>
         </div>
@@ -41,18 +40,6 @@ const maskClickClose = (event: Event) => {
     position: relative;
     margin: auto;
     transition: all 0.3s ease;
-}
-
-.modal__close-cross {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    color: var(--color-border-hover);
-    cursor: pointer;
-    z-index: 1;    
-}
-.modal__close-cross:hover {
-    color: var(--color-text); 
 }
 
 .modal-enter-from {

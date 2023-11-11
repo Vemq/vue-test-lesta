@@ -20,7 +20,6 @@ defineProps<ShipItemProps>();
     </div>
 
     <img class="grid-item__image" :src="shipImageLink" alt="ship image" />
-    <div class="grid-item__description-popover"></div>
   </div>
 </template>
 
@@ -74,12 +73,5 @@ defineProps<ShipItemProps>();
   position: relative;
   object-fit: none;
   pointer-events: none;
-}
-
-.grid-item__description-popover {
-  position: absolute;
-  right: 50px;
-  box-shadow: 10px 5px 5px red;
-  z-index: 2;
 }
 </style>

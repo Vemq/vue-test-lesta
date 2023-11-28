@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FiltersSearchToolbar from './filters-search-toolbar/FiltersSearchToolbar.vue';
-import ContentSection from './ship-catalog/ShipsCatalog.vue';
+import ShipsCatalog from './ship-catalog/ShipsCatalog.vue';
 import ShipCategories from './ship-categories/ShipCategories.vue';
 </script>
 
@@ -9,7 +9,7 @@ import ShipCategories from './ship-categories/ShipCategories.vue';
     <FiltersSearchToolbar />
 
     <Transition>
-      <ContentSection />
+      <ShipsCatalog />
     </Transition>
 
     <Transition>

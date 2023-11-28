@@ -9,7 +9,7 @@ export const useSearchQueryStore = defineStore('searchQueryStore', () => {
     const searchQuery = ref('');
 
     function setSerchQueryText(queryText: string) {
-        const query = searchQuery.value = queryText.toLowerCase().trim();
+        const query = queryText.toLowerCase().trim();
         serchInputValue.value = query;
         searchQuery.value = query;
     }

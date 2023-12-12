@@ -23,7 +23,7 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(
     >
       <img
         class="ship-categories__flag-image"
-        :src="slotProps.filter.icons?.small"
+        :src="slotProps.filter.icons?.large"
         :alt="`flag image of ${slotProps.filter.title}`"
       />
 
@@ -80,6 +80,10 @@ const { nationsData, shipTypesData, levelsData } = storeToRefs(
   border: 1px solid var(--color-border);
   width: 60px;
   text-align: center;
+}
+
+.ship-categories__flag-image {
+  width: 150px;
 }
 
 .ship-categories__level-item:hover {

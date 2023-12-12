@@ -57,7 +57,7 @@ interface NationInfo {
     color: string;
     icons: {
         tiny: string;
-        small: string;
+        large: string;
     }
 }
 

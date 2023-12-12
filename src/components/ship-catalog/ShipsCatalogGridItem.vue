@@ -44,7 +44,7 @@ defineProps<ShipItemProps>();
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   margin-left: 5px;
@@ -70,8 +70,11 @@ defineProps<ShipItemProps>();
 }
 
 .grid-item__image {
-  position: relative;
-  object-fit: none;
+  position: absolute;
+  max-height: 150px;
+  max-width: 250px;
+  bottom: -15px;
+  left: 10px;
   pointer-events: none;
 }
 </style>

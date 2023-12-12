@@ -53,7 +53,7 @@ const SHIPS_DATA_QUERY = gql`
       color
       icons {
         tiny
-        small
+        large
       }
     }
   }
@@ -63,8 +63,8 @@ const { result, error, loading } = useQuery(SHIPS_DATA_QUERY);
 
 watch(loading, () => {
   if (result.value) {
-    shipsDataStore.setDataToStore(result)
-  };
+    shipsDataStore.setDataToStore(result);
+  }
 });
 </script>
 
